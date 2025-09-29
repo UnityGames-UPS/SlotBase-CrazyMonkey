@@ -508,8 +508,6 @@ public class SocketIOManager : MonoBehaviour
         MessageData message = new MessageData();
         message.payload = new Data();
         message.type = "GAMBLE";
-        Debug.Log(slotManager.BetCounter);
-        message.payload.lastWinning = slotManager.BetCounter;
         message.payload.Event = "init";
         // Serialize message data to JSON
         string json = JsonUtility.ToJson(message);
@@ -522,7 +520,6 @@ public class SocketIOManager : MonoBehaviour
         MessageData message = new MessageData();
         message.payload = new Data();
         message.type = "GAMBLE";
-        message.payload.lastWinning = slotManager.BetCounter;
         message.payload.Event = "draw";
         // Serialize message data to JSON
         string json = JsonUtility.ToJson(message);
@@ -537,7 +534,6 @@ public class SocketIOManager : MonoBehaviour
         message.payload = new Data();
         message.type = "GAMBLE";
 
-        message.payload.lastWinning = slotManager.BetCounter;
         message.payload.Event = "collect";
         // Serialize message data to JSON
         string json = JsonUtility.ToJson(message);
@@ -559,7 +555,6 @@ public class SocketIOManager : MonoBehaviour
         message.payload = new Data();
         message.type = "GAMBLE";
 
-        message.payload.lastWinning = slotManager.BetCounter;
         message.payload.Event = "collect";
         // Serialize message data to JSON
         string json = JsonUtility.ToJson(message);
@@ -635,7 +630,6 @@ public class SocketIOManager : MonoBehaviour
 public class GambleData
 {
     public string type;
-    public double lastWinning;
     public string cardSelected;
     public string Event;
 
@@ -674,7 +668,6 @@ public class Data
 {
     public int betIndex;
     public string Event;
-    public double lastWinning;
     public int index;
 
 }
