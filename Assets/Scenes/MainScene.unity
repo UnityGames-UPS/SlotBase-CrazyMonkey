@@ -5657,7 +5657,7 @@ MonoBehaviour:
   slotManager: {fileID: 2046803210}
   uiManager: {fileID: 377874625}
   bonusdata: []
-  testToken: 5e8a43638da349bb91ab83a621f66532
+  testToken: b29b5ab78a294eedb9e4f36797a4bc9b
   JSManager: {fileID: 2099207717}
   RaycastBlocker: {fileID: 937299964}
 --- !u!1 &512334774
@@ -28236,7 +28236,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1112.4406, y: -636}
+  m_AnchoredPosition: {x: 1112.4406, y: -1058}
   m_SizeDelta: {x: 200, y: 3390}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!82 &2606991967364631555
@@ -29022,7 +29022,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 123.60449, y: -636}
+  m_AnchoredPosition: {x: 123.60449, y: -1058}
   m_SizeDelta: {x: 200, y: 3390}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!1 &3078023683515247678
@@ -31831,7 +31831,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 865.23157, y: -636}
+  m_AnchoredPosition: {x: 865.23157, y: -1058}
   m_SizeDelta: {x: 200, y: 3390}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!1 &5270114315850734908
@@ -32447,7 +32447,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 370.81354, y: -636}
+  m_AnchoredPosition: {x: 370.81354, y: -1058}
   m_SizeDelta: {x: 200, y: 3390}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &5557745680845934534
@@ -35388,7 +35388,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 618.0225, y: -636}
+  m_AnchoredPosition: {x: 618.0225, y: -1058}
   m_SizeDelta: {x: 200, y: 3390}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!224 &7701032360236913011
