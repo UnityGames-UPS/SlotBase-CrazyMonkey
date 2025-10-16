@@ -386,6 +386,7 @@ public class SlotBehaviour : MonoBehaviour
     {
       StopGameAnimation();
     }
+    currentBalance = SocketManager.playerdata.balance;
     PayCalculator.ResetStaticLine();
     tweenroutine = StartCoroutine(TweenRoutine());
   }

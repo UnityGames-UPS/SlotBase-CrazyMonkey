@@ -4804,7 +4804,10 @@ MonoBehaviour:
   DoubleEnd_Button: {fileID: 1182304326}
   CollectEnd_Button: {fileID: 1279730347}
   slider: {fileID: 814047627}
-  gambleCardsbuttons: []
+  gambleCardsbuttons:
+  - {fileID: 691905136}
+  - {fileID: 1158961521}
+  - {fileID: 90006012}
 --- !u!4 &443352634
 Transform:
   m_ObjectHideFlags: 0
@@ -5656,7 +5659,7 @@ MonoBehaviour:
   slotManager: {fileID: 2046803210}
   uiManager: {fileID: 377874625}
   bonusdata: []
-  testToken: afc6ee91871d475bbecc8294aa88dbb9
+  testToken: 23d0407307be468d9a9fdaacbf7ee8e5
   JSManager: {fileID: 2099207717}
   RaycastBlocker: {fileID: 937299964}
 --- !u!1 &512334774
