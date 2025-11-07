@@ -238,11 +238,33 @@ public class UIManager : MonoBehaviour
 
   private void OpenPopup(GameObject Popup)
   {
+    if (Popup == LBPopup_Object)
+    {
+      if (PaytablePopup_Object.activeSelf) PaytablePopup_Object.SetActive(false);
+      if (Setting_panel.activeSelf) Setting_panel.SetActive(false);
+    }
+    if (Popup == DisconnectPopup_Object)
+    {
+      if (PaytablePopup_Object.activeSelf) PaytablePopup_Object.SetActive(false);
+      if (Setting_panel.activeSelf) Setting_panel.SetActive(false);
+      if (LBPopup_Object.activeSelf) LBPopup_Object.SetActive(false);
+    }
+    if (Popup == ReconnectPopup_Object)
+    {
+      if (PaytablePopup_Object.activeSelf) PaytablePopup_Object.SetActive(false);
+      if (Setting_panel.activeSelf) Setting_panel.SetActive(false);
+      if (LBPopup_Object.activeSelf) LBPopup_Object.SetActive(false);
+    }
     if (audioController) audioController.PlayButtonAudio();
     if (Popup) Popup.SetActive(true);
     if (MainPopup_Object) MainPopup_Object.SetActive(true);
   }
 
+  internal void BonusPopupClose()
+  {
+    if (PaytablePopup_Object.activeSelf) ClosePopup(PaytablePopup_Object);
+    if (Setting_panel.activeSelf) ClosePopup(Setting_panel);
+  }
   private void ClosePopup(GameObject Popup)
   {
     if (audioController) audioController.PlayButtonAudio();

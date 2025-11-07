@@ -12,6 +12,7 @@ public class BonusController : MonoBehaviour
     private GameObject Bonus_Object;
     [SerializeField]
     private SlotBehaviour slotManager;
+    private UIManager uimanager;
     [SerializeField] private SocketIOManager socketManager;
     [SerializeField]
     private GameObject raycastPanel;
@@ -27,7 +28,7 @@ public class BonusController : MonoBehaviour
 
     int index = 0;
     double winAmount = 0;
-    public double Totalwinamount=0;
+    public double Totalwinamount = 0;
     public Image BonusPanel;
 
     internal void GetBailCaseList()
@@ -87,7 +88,12 @@ public class BonusController : MonoBehaviour
         }
         if (raycastPanel) raycastPanel.SetActive(false);
         if (_audioManager) _audioManager.SwitchBGSound(true);
-        if (Bonus_Object) Bonus_Object.SetActive(true);
+        if (Bonus_Object)
+        {
+            uimanager.BonusPopupClose();
+            Bonus_Object.SetActive(true);
+        }
+        ;
     }
 
     internal void PlayWinSound()
