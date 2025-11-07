@@ -1,2 +1,2 @@
 # SlotBase-CrazyMonkey
-Crazy Monkey Dev
+Crazy Monkey
