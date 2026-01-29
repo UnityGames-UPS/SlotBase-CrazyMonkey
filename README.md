@@ -1,2 +1,1 @@
-# SlotBase-CrazyMonkey
-Crazy Monkey DEV
+# SlotBase-CrazyMonkey-Prod
