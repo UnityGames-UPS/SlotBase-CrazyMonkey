@@ -12,7 +12,7 @@ public class BonusController : MonoBehaviour
     private GameObject Bonus_Object;
     [SerializeField]
     private SlotBehaviour slotManager;
-    private UIManager uimanager;
+    [SerializeField] private UIManager uimanager;
     [SerializeField] private SocketIOManager socketManager;
     [SerializeField]
     private GameObject raycastPanel;
