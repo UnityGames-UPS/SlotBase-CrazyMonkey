@@ -14,6 +14,8 @@ public class AudioController : MonoBehaviour
     [SerializeField] private AudioSource bg_audioBonus;
     [SerializeField] private AudioSource audioPlayer_Bonus;
 
+    private bool isForceMuted = false;
+    private readonly Dictionary<AudioSource, bool> preFocusMuteState = new Dictionary<AudioSource, bool>();
 
     private void Start()
     {
@@ -22,28 +24,40 @@ public class AudioController : MonoBehaviour
         audioSpin_button.clip = clips[clips.Length-2];
     }
 
-    internal void CheckFocusFunction(bool focus, bool IsSpinning)
+    // Focus-driven mute. Called from BOTH the WebGL/JS OnFocusChanged path (UIManager)
+    // and Unity's native OnApplicationFocus (SlotBehaviour) - both must share this one method.
+    internal void SetMuteAll(bool forceMute)
     {
-        if (!focus)
+        if (forceMute == isForceMuted) return;   // already in that state - don't re-capture/re-restore
+        isForceMuted = forceMute;
+
+        foreach (AudioSource source in AllSources())
         {
-            bg_adudio.Pause();
-            audioPlayer_wl.Pause();
-            audioPlayer_button.Pause();
-        }
-        else
-        {
-            if (!bg_adudio.mute) bg_adudio.UnPause();
-            if (IsSpinning)
+            if (source == null) continue;
+            if (forceMute)
             {
-                if (!audioPlayer_wl.mute) audioPlayer_wl.UnPause();
+                preFocusMuteState[source] = source.mute;
+                source.mute = true;
             }
             else
             {
-                StopWLAaudio();
+                source.mute = preFocusMuteState.TryGetValue(source, out bool prevMuted) ? prevMuted : source.mute;
             }
-            if (!audioPlayer_button.mute) audioPlayer_button.UnPause();
-
         }
+    }
+
+    private AudioSource[] AllSources()
+    {
+        return new AudioSource[] { bg_adudio, audioPlayer_wl, audioPlayer_button, audioSpin_button, bg_audioBonus, audioPlayer_Bonus };
+    }
+
+    // Every user-driven mute write goes through here so an in-effect focus mute
+    // can't restore over a setting the player changed in the meantime.
+    private void ApplyUserMute(AudioSource source, bool mute)
+    {
+        if (source == null) return;
+        source.mute = mute;
+        if (isForceMuted) preFocusMuteState[source] = mute;
     }
 
     internal void SwitchBGSound(bool isbonus)
@@ -143,20 +157,20 @@ public class AudioController : MonoBehaviour
         switch (type)
         {
             case "bg":
-                bg_adudio.mute = toggle;
+                ApplyUserMute(bg_adudio, toggle);
                 break;
             case "button":
-                audioPlayer_button.mute=toggle;
-                audioSpin_button.mute=toggle;
+                ApplyUserMute(audioPlayer_button, toggle);
+                ApplyUserMute(audioSpin_button, toggle);
                 break;
             case "wl":
-                audioPlayer_wl.mute=toggle;
+                ApplyUserMute(audioPlayer_wl, toggle);
                 break;
             case "all":
-                audioPlayer_wl.mute = toggle;
-                bg_adudio.mute = toggle;
-                audioPlayer_button.mute = toggle;
-                audioSpin_button.mute = toggle;
+                ApplyUserMute(audioPlayer_wl, toggle);
+                ApplyUserMute(bg_adudio, toggle);
+                ApplyUserMute(audioPlayer_button, toggle);
+                ApplyUserMute(audioSpin_button, toggle);
                 break;
         }
     }
@@ -167,27 +181,27 @@ public class AudioController : MonoBehaviour
         {
             case "bg":
 
-                bg_adudio.mute = (vol == 0);
+                ApplyUserMute(bg_adudio, vol == 0);
                 bg_adudio.volume = vol;
-                bg_audioBonus.mute = (vol == 0);
+                ApplyUserMute(bg_audioBonus, vol == 0);
                 bg_audioBonus.volume = vol;
                 break;
             case "button":
-                audioPlayer_button.mute = (vol == 0);
+                ApplyUserMute(audioPlayer_button, vol == 0);
                 audioPlayer_button.volume = vol;
                 break;
             case "wl":
-                audioPlayer_wl.mute = (vol == 0);
+                ApplyUserMute(audioPlayer_wl, vol == 0);
                 audioPlayer_wl.volume = vol;
-                audioPlayer_Bonus.mute = (vol == 0);
+                ApplyUserMute(audioPlayer_Bonus, vol == 0);
                 audioPlayer_Bonus.volume = vol;
                 audioSpin_button.volume = vol;
                 break;
             case "all":
 
-                audioPlayer_wl.mute = (vol == 0);
-                bg_adudio.mute = (vol == 0);
-                audioPlayer_button.mute = (vol == 0);
+                ApplyUserMute(audioPlayer_wl, vol == 0);
+                ApplyUserMute(bg_adudio, vol == 0);
+                ApplyUserMute(audioPlayer_button, vol == 0);
                 audioPlayer_wl.volume = vol;
                 bg_adudio.volume = vol;
                 audioPlayer_button.volume = vol;

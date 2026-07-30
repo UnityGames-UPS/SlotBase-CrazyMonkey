@@ -393,7 +393,8 @@ public class SlotBehaviour : MonoBehaviour
 
   private void OnApplicationFocus(bool focus)
   {
-    audioController.CheckFocusFunction(focus, CheckSpinAudio);
+    // Same shared mute-all method the WebGL/JS OnFocusChanged path calls (UIManager).
+    if (audioController) audioController.SetMuteAll(!focus);
   }
 
   internal void shuffleInitialMatrix()
@@ -630,6 +631,15 @@ public class SlotBehaviour : MonoBehaviour
     if (TotalWin_text) TotalWin_text.text = winamount.ToString("f3");
 
     // Debug.Log($" Balance : " + balance + " Win amount :" + winamount + " Texts fields" + Balance_text.text.ToString() + "    " + TotalWin_text.text.ToString());
+  }
+
+  // Backend-pushed balance correction (balance:sync). Snaps the display - not a win tween -
+  // and writes the field the spin gate reads, then re-checks the low-balance gate.
+  internal void UpdateBalanceDisplay(double newBalance)
+  {
+    currentBalance = newBalance;
+    if (Balance_text) Balance_text.text = newBalance.ToString("f3");
+    CompareBalance();
   }
 
   //start the icons animation
